@@ -23,5 +23,9 @@ require __DIR__.'/auth.php';
 
 
 Route::get('/blog/home', [BlogController::class, 'index'])->name('posts.index');
-
 Route::get('/post/{id}', [BlogController::class, 'show'])->name('post.show');
+
+Route::post('/posts/{post}/like', [BlogController::class, 'like'])
+    ->name('posts.like')
+    ->middleware('auth');
+
