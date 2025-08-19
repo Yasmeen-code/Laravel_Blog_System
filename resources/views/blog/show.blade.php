@@ -25,7 +25,6 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Navigation -->
     <nav class="bg-white shadow-sm">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
@@ -38,7 +37,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header class="relative h-96 overflow-hidden">
         @if($post->image)
             <div class="absolute inset-0">
@@ -60,10 +58,8 @@
         </div>
     </header>
 
-    <!-- Article Content -->
     <main class="container mx-auto px-6 py-12">
         <div class="max-w-4xl mx-auto">
-            <!-- Author Section -->
             <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
                 <div class="flex items-center">
                     <a href="{{ route('profile.show', $post->user->id) }}" 
@@ -80,24 +76,12 @@
                 </div>
             </div>
 
-            <!-- Article Body -->
             <article class="bg-white rounded-2xl shadow-lg p-8 mb-8">
                 <div class="prose-custom text-gray-700 leading-relaxed">
                     {!! nl2br(e($post->content)) !!}
                 </div>
             </article>
 
-            <!-- Tags Section -->
-            <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
-                <h3 class="font-semibold text-gray-900 mb-4">Tags</h3>
-                <div class="flex flex-wrap gap-2">
-                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Technology</span>
-                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Lifestyle</span>
-                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Business</span>
-                </div>
-            </div>
-
-            <!-- Navigation -->
             <div class="flex justify-between items-center">
                 <a href="{{ route('posts.index') }}" 
                    class="inline-flex items-center px-6 py-3 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition">
@@ -110,11 +94,6 @@
                 <div class="flex space-x-4">
                     <button class="p-3 bg-gray-100 rounded-full hover:bg-gray-200 transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.632 4.316C18.114 15.062 18 15.518 18 16c0 .482.114.938.316 1.342m0-2.684a3 3 0 110 2.684M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                    </button>
-                    <button class="p-3 bg-gray-100 rounded-full hover:bg-gray-200 transition">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                         </svg>
                     </button>
@@ -122,8 +101,7 @@
             </div>
         </div>
     </main>
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+\    <footer class="bg-gray-900 text-white py-12">
         <div class="container mx-auto px-6 text-center">
             <h3 class="font-serif text-2xl font-bold mb-2">Elegant Blog</h3>
             <p class="text-gray-400 mb-4">Curated insights for the discerning reader</p>

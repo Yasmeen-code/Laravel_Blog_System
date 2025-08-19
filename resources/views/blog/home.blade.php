@@ -39,59 +39,6 @@
     </header>
 
     <main class="container mx-auto px-6 py-16">
-        @if($posts->count() > 0)
-            <div class="mb-16">
-                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden card-hover">
-                    <div class="lg:flex">
-                        <div class="lg:w-2/5">
-                            @if($posts[0]->image)
-                                <div class="h-64 lg:h-80 w-full">
-                                    <img src="{{ asset($posts[0]->image) }}" 
-                                         alt="{{ $posts[0]->title }}" 
-                                         class="w-full h-full object-cover">
-                                </div>
-                            @else
-                                <div class="h-64 lg:h-80 w-full bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center">
-                                    <svg class="w-16 h-16 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                    </svg>
-                                </div>
-                            @endif
-                        </div>
-                        <div class="p-8 lg:w-3/5">
-                            <div class="flex items-center mb-4">
-                                <span class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">FEATURED</span>
-                                <span class="text-gray-500 text-sm ml-4">{{ $posts[0]->created_at->format('M d, Y') }}</span>
-                            </div>
-                            <h2 class="font-serif text-3xl font-bold text-gray-900 mb-4 leading-tight">{{ $posts[0]->title }}</h2>
-                            <p class="text-gray-600 mb-6 leading-relaxed">{{ Str::limit($posts[0]->content, 150) }}</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <a href="{{ route('profile.show', $posts[0]->user->id ?? 1) }}" 
-                                       class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold">
-                                        {{ substr($posts[0]->user->name ?? 'A', 0, 1) }}
-                                    </a>
-                                    <div class="ml-3">
-                                        <a href="{{ route('profile.show', $posts[0]->user->id ?? 1) }}" 
-                                           class="text-sm font-semibold text-gray-900 hover:text-purple-600 transition">
-                                            {{ $posts[0]->user->name ?? 'Anonymous Author' }}
-                                        </a>
-                                        <p class="text-xs text-gray-500">{{ $posts[0]->user->posts->count() ?? 0 }} articles</p>
-                                    </div>
-                                </div>
-                                <a href="{{ route('post.show', $posts[0]->id) }}" 
-                                   class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-full hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 shadow-lg">
-                                    Read Article
-                                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($posts->slice(1) as $post)
