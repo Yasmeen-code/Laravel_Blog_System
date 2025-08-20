@@ -4,9 +4,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -22,7 +19,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-Route::get('/blog/home', [BlogController::class, 'index'])->name('posts.index');
+Route::get('/', [BlogController::class, 'index'])->name('posts.index');
 Route::get('/post/{id}', [BlogController::class, 'show'])->name('post.show');
 
 Route::post('/posts/{post}/like', [BlogController::class, 'like'])

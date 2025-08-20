@@ -9,7 +9,7 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $posts = Post::with(['user', 'likes'])->latest()->paginate(10);
+        $posts = Post::with(['user', 'likes'])->latest()->paginate(9);
 
         return view('blog.home', compact('posts'));
     }
@@ -21,11 +21,9 @@ class BlogController extends Controller
    public function like(Post $post)
 {
 
-    // لو عامل لايك قبل كده -> الغيه
     if ($post->likes()->where('user_id', Auth::id())->exists()) {
         $post->likes()->where('user_id',Auth::id())->delete();
     } else {
-        // لو أول مرة يعمل لايك -> ضيفه
         $post->likes()->create([
             'user_id' =>Auth::id(),
         ]);

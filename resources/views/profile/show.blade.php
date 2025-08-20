@@ -44,7 +44,6 @@
                 </div>
                 <div>
                     <h1 class="font-serif text-4xl font-bold mb-2">{{ $user->name }}</h1>
-                    <p class="text-xl opacity-90 mb-4">Author & Content Creator</p>
                     <div class="flex items-center space-x-4">
                         <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
                             {{ $user->posts->count() ?? 0 }} Articles
@@ -61,34 +60,18 @@
     <!-- Profile Content -->
     <main class="container mx-auto px-6 py-12">
         <div class="max-w-6xl mx-auto">
-            <!-- Bio Section -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
-                <h2 class="font-serif text-2xl font-bold text-gray-900 mb-4">About {{ $user->name }}</h2>
-                <p class="text-gray-600 leading-relaxed">
-                    {{ $user->bio ?? 'Passionate writer and storyteller dedicated to sharing insights and perspectives on various topics. Committed to creating engaging content that inspires and informs readers.' }}
-                </p>
-            </div>
-
+       
             <!-- Stats Section -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
                     <div class="text-3xl font-bold text-purple-600 mb-2">{{ $user->posts->count() ?? 0 }}</div>
                     <div class="text-gray-600">Articles Published</div>
                 </div>
-                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
-                    <div class="text-3xl font-bold text-indigo-600 mb-2">0</div>
-                    <div class="text-gray-600">Followers</div>
-                </div>
-                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
-                    <div class="text-3xl font-bold text-pink-600 mb-2">0</div>
-                    <div class="text-gray-600">Following</div>
-                </div>
-            </div>
+               
 
             <!-- Articles Section -->
             <div class="bg-white rounded-2xl shadow-lg p-8">
                 <h2 class="font-serif text-2xl font-bold text-gray-900 mb-6">Latest Articles</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     @foreach($user->posts as $post)
                         <article class="border border-gray-200 rounded-xl p-6 hover:shadow-lg transition">
                             <div class="flex items-center mb-3">
@@ -103,7 +86,6 @@
                         </article>
                     @endforeach
                 </div>
-                
                 @if($user->posts->count() == 0)
                     <div class="text-center py-12">
                         <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -112,26 +94,32 @@
                         <p class="text-gray-500">No articles published yet</p>
                     </div>
                 @endif
+                <h2 class="font-serif text-2xl font-bold text-gray-900 mb-6">Liked Articles</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    @foreach($user->likes as $like)
+                        <article class="border border-gray-200 rounded-xl p-6 hover:shadow-lg transition">
+                            <div class="flex items-center mb-3">
+                                <span class="text-sm text-gray-500">{{ $like->post->created_at->format('M d, Y') }}</span>
+                            </div>
+                            <h3 class="font-semibold text-lg text-gray-900 mb-2">{{ $like->post->title }}</h3>
+                            <p class="text-gray-600 text-sm mb-4">{{ Str::limit($like->post->content, 100) }}</p>
+                            <a href="{{ route('post.show', $like->post->id) }}" 
+                               class="text-purple-600 font-semibold hover:text-purple-800 transition">
+                                Read Article →
+                            </a>
+                        </article>
+                    @endforeach
+                </div>
+                @if($user->likes->count() == 0)
+                    <div class="text-center py-12">
+                        <p class="text-gray-500">No liked articles yet</p>
+                    </div>
+                @endif
+              
+               
             </div>
 
-            <!-- Contact Section -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 mt-8">
-                <h2 class="font-serif text-2xl font-bold text-gray-900 mb-4">Get in Touch</h2>
-                <div class="flex space-x-4">
-                    <button class="flex items-center px-4 py-2 bg-gray-100 rounded-full hover:bg-gray-200 transition">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                        Email
-                    </button>
-                    <button class="flex items-center px-4 py-2 bg-gray-100 rounded-full hover:bg-gray-200 transition">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.632 4.316C18.114 15.062 18 15.518 18 16c0 .482.114.938.316 1.342m0-2.684a3 3 0 110 2.684M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                        Social
-                    </button>
-                </div>
-            </div>
+         
         </div>
     </main>
 

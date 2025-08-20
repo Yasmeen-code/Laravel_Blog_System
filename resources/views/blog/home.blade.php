@@ -29,19 +29,45 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <header class="luxury-gradient text-white py-20">
-        <div class="container mx-auto px-6">
-            <div class="text-center">
-                <h1 class="font-serif text-5xl md:text-6xl font-bold mb-4">Elegant Insights</h1>
-                <p class="text-xl opacity-90 tracking-wide">Discover refined perspectives and curated wisdom</p>
-            </div>
+   <header class="luxury-gradient text-white py-20 relative">
+    <div class="container mx-auto px-6">
+        <div class="absolute top-6 right-6 flex items-center space-x-4">
+            @auth
+                <a href="{{ route('profile.show', auth()->user()->id) }}" 
+                   class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full hover:bg-white/20 transition">
+                    <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                        {{ substr(auth()->user()->name, 0, 1) }}
+                    </div>
+                    <span class="text-sm font-medium">{{ auth()->user()->name }}</span>
+                </a>
+                <form method="POST" action="{{ route('logout') }}" class="inline">
+                    @csrf
+                    <button type="submit" class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full hover:bg-white/20 transition text-sm">
+                        Logout
+                    </button>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full hover:bg-white/20 transition">
+                    Login
+                </a>
+                <a href="{{ route('register') }}" class="bg-white text-gray-900 px-4 py-2 rounded-full hover:bg-gray-100 transition">
+                    Register
+                </a>
+            @endauth
         </div>
-    </header>
+
+        <div class="text-center">
+            <h1 class="font-serif text-5xl md:text-6xl font-bold mb-4">Elegant Insights</h1>
+            <p class="text-xl opacity-90 tracking-wide">Discover refined perspectives and curated wisdom</p>
+        </div>
+    </div>
+</header>
+
 
     <main class="container mx-auto px-6 py-16">
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @foreach($posts->slice(1) as $post)
+            @foreach($posts->slice(0) as $post)
                 <article class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
                     <div class="h-48 w-full">
                         @if($post->image)
@@ -73,7 +99,7 @@
                         </div>
 
                         <h3 class="font-serif text-xl font-bold text-gray-900 mb-3 leading-tight">{{ $post->title }}</h3>
-                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">{{ Str::limit($post->content, 100) }}</p>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">{{ Str::limit($post->content, 70) }}</p>
                         
                         <a href="{{ route('post.show', $post->id) }}" 
                            class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition group">
