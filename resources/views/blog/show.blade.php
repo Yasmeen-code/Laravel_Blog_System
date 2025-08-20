@@ -91,7 +91,7 @@
                     Back to Articles
                 </a>
                 
-              <div class="flex space-x-4">
+              < class="flex space-x-4">
 <form action="{{ route('posts.like', $post->id) }}" method="POST">
     @csrf
     <button type="submit" 
@@ -108,13 +108,10 @@
         </svg>
     </button>
 </form>
-
-</div>
-
             </div>
         </div>
     </main>
-\    <footer class="bg-gray-900 text-white py-12">
+<footer class="bg-gray-900 text-white py-12">
         <div class="container mx-auto px-6 text-center">
             <h3 class="font-serif text-2xl font-bold mb-2">Elegant Blog</h3>
             <p class="text-gray-400 mb-4">Curated insights for the discerning reader</p>

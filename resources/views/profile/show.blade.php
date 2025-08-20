@@ -115,11 +115,8 @@
                         <p class="text-gray-500">No liked articles yet</p>
                     </div>
                 @endif
-              
-               
-            </div>
-
-         
+           
+               </div>     
         </div>
     </main>
 
