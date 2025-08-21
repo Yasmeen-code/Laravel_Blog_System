@@ -32,4 +32,30 @@ class BlogController extends Controller
 
         return back();
     }
+    public function create(){
+        return view('blog.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $post = new Post();
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->user_id = Auth::id();
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public');
+            $post->image = $imagePath;
+        }
+
+        $post->save();
+
+        return redirect()->route('post.show', $post->id)->with('success', 'Post created successfully!');
+    }
 }

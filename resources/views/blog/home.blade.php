@@ -33,6 +33,13 @@
     <div class="container mx-auto px-6">
         <div class="absolute top-6 right-6 flex items-center space-x-4">
             @auth
+                <a href="{{ route('posts.create') }}" 
+                   class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-4 py-2 rounded-full hover:from-indigo-600 hover:to-purple-600 transition">
+                    <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    Create Post
+                </a>
                 <a href="{{ route('profile.show', auth()->user()->id) }}" 
                    class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full hover:bg-white/20 transition">
                     <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
