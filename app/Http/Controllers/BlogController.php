@@ -32,7 +32,8 @@ class BlogController extends Controller
 
         return back();
     }
-    public function create(){
+    public function create()
+    {
         return view('blog.create');
     }
 
@@ -50,8 +51,9 @@ class BlogController extends Controller
         $post->user_id = Auth::id();
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('posts', 'public');
-            $post->image = $imagePath;
+            $imageName = time() . '.' . $request->file('image')->extension();
+            $request->file('image')->move(public_path('imgs'), $imageName);
+            $post->image = 'imgs/' . $imageName;
         }
 
         $post->save();
