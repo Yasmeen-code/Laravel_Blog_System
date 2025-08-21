@@ -91,24 +91,49 @@
                     Back to Articles
                 </a>
                 
-              <div class="flex space-x-4">
-<form action="{{ route('posts.like', $post->id) }}" method="POST">
-    @csrf
-    <button type="submit" 
-        class="p-3 rounded-full transition 
-               {{ auth()->check() && $post->likes->where('user_id', auth()->id())->count() ? 'bg-red-100 hover:bg-red-200' : 'bg-gray-100 hover:bg-gray-200' }}">
-        
-        <svg class="w-5 h-5 {{ auth()->check() && $post->likes->where('user_id', auth()->id())->count() ? 'text-red-500 fill-red-500' : 'text-gray-500' }}" 
-             viewBox="0 0 24 24" 
-             fill="{{ auth()->check() && $post->likes->where('user_id', auth()->id())->count() ? 'currentColor' : 'none' }}" 
-             stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-            </path>
-        </svg>
-    </button>
-</form>
-            </div></div>
+                <div class="flex space-x-4">
+                    @auth
+                        @if(auth()->id() === $post->user_id)
+                            <a href="{{ route('posts.edit', $post->id) }}" 
+                               class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                </svg>
+                                Edit
+                            </a>
+                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" 
+                                        class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition"
+                                        onclick="return confirm('Are you sure you want to delete this post?')">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
+                                    Delete
+                                </button>
+                            </form>
+                        @endif
+                    @endauth
+                    
+                    <form action="{{ route('posts.like', $post->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" 
+                            class="p-3 rounded-full transition 
+                                   {{ auth()->check() && $post->likes->where('user_id', auth()->id())->count() ? 'bg-red-100 hover:bg-red-200' : 'bg-gray-100 hover:bg-gray-200' }}">
+                            
+                            <svg class="w-5 h-5 {{ auth()->check() && $post->likes->where('user_id', auth()->id())->count() ? 'text-red-500 fill-red-500' : 'text-gray-500' }}" 
+                                 viewBox="0 0 24 24" 
+                                 fill="{{ auth()->check() && $post->likes->where('user_id', auth()->id())->count() ? 'currentColor' : 'none' }}" 
+                                 stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                </path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </main>
 <footer class="bg-gray-900 text-white py-12">
