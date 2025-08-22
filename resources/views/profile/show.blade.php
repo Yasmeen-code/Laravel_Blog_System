@@ -22,7 +22,6 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Navigation -->
     <nav class="bg-white shadow-sm">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
@@ -35,7 +34,6 @@
         </div>
     </nav>
 
-    <!-- Profile Header -->
     <header class="luxury-gradient text-white py-20">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center">
@@ -57,18 +55,14 @@
         </div>
     </header>
 
-    <!-- Profile Content -->
     <main class="container mx-auto px-6 py-12">
         <div class="max-w-6xl mx-auto">
        
-            <!-- Stats Section -->
                 <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
                     <div class="text-3xl font-bold text-purple-600 mb-2">{{ $user->posts->count() ?? 0 }}</div>
                     <div class="text-gray-600">Articles Published</div>
                 </div>
                
-
-            <!-- Articles Section -->
             <div class="bg-white rounded-2xl shadow-lg p-8">
                 <h2 class="font-serif text-2xl font-bold text-gray-900 mb-6">Latest Articles</h2>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -120,7 +114,6 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
         <div class="container mx-auto px-6 text-center">
             <h3 class="font-serif text-2xl font-bold mb-2">{{ $user->name }}</h3>
