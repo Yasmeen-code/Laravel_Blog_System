@@ -21,7 +21,7 @@ class Login extends Component
         $this->validate();
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-            return redirect()->intended('dashboard');
+            return redirect()->intended('/');
         }
 
         session()->flash('error', 'Invalid credentials.');
